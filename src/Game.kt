@@ -24,21 +24,31 @@ fun main(){
     (0..players.lastIndex).forEach{
         println(players[it])
     }
-    board.place(players[activePlayer], 1)
-    activePlayer = 1
-    board.place(players[activePlayer], 2)
-    activePlayer = 0
-    board.place(players[activePlayer], 4)
+    board.place(players[activePlayer], 0)
     activePlayer = 1
     board.place(players[activePlayer], 8)
-    checkForWinner(board.getPositions())
+    activePlayer = 0
+    board.place(players[activePlayer], 1)
+    activePlayer = 1
+    board.place(players[activePlayer], 7)
+    activePlayer = 0
+    board.place(players[activePlayer], 3)
+    println(checkForWinner(board.getPositions()))
 }
 
-fun checkForWinner(positions: List<Shape>) {
-    //Print all positions on the board
-    (0..positions.lastIndex).forEach {
-        println("$it : ${positions[it]}")
+fun checkForWinner(positions: List<Shape>): Player? {
+    var winningShape: Shape
+    var winningPlayer: Player? = null
+    if(positions[0] == positions[1] && positions[1] == positions[2] ){winningShape = positions[0]}
+    else winningShape = Shape.Blank
+
+    (0..players.lastIndex).forEach {
+        when (players[it].shape){
+            winningShape -> winningPlayer = players[it]
+            //else -> winningPlayer = null
+        }
     }
+    return winningPlayer
 }
 
 
