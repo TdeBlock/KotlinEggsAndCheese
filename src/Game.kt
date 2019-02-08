@@ -19,7 +19,7 @@ val players: List<Player> = listOf(player1, player2)
 val board = Board()
 
 fun main(){
-    var activePlayer: Int = 0
+    var activePlayer = 0
 
     (0..players.lastIndex).forEach{
         println(players[it])
@@ -31,20 +31,14 @@ fun main(){
     board.place(players[activePlayer], 4)
     activePlayer = 1
     board.place(players[activePlayer], 8)
-
-    when (checkForWinner()){
-        Shape.Circle -> println("Player 1 wins!")
-        Shape.Cross -> println("Player 2 wins!")
-        else -> println("No one wins!")
-    }
+    checkForWinner(board.getPositions())
 }
 
-fun checkForWinner(): Shape{
+fun checkForWinner(positions: List<Shape>) {
     //Print all positions on the board
-    val positions = board.getPositions()
     (0..positions.lastIndex).forEach {
         println("$it : ${positions[it]}")
     }
-    return Shape.Triangle
 }
+
 
